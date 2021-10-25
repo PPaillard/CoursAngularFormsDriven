@@ -1,44 +1,31 @@
-<form (ngSubmit)="myForm.valid && sendForm()" #myForm="ngForm">
-  <label>
-    Adresse mail :
-    <input
-      type="email"
-      name="adresseMail"
-      [(ngModel)]="mail"
-      required
-      email
-      #adresseMail="ngModel"
-    />
-  </label>
-  <div
-    *ngIf="
-      myForm.submitted && adresseMail.errors && adresseMail.errors.required
-    "
-  >
-    Veuillez rentrer une adresse mail
-  </div>
-  <div
-    *ngIf="myForm.submitted && adresseMail.errors && adresseMail.errors.email"
-  >
-    Le format d'email est incorrect
-  </div>
-  <label>
-    Mot de passe :
-    <input
-      type="password"
-      name="motDePasse"
-      [(ngModel)]="motDePasse"
-      #passe="ngModel"
-      required
-      minlength="6"
-    />
-  </label>
-  <div *ngIf="myForm.submitted && passe.errors && passe.errors.required">
-    Veuillez rentrer un mot de passe
-  </div>
-  <div *ngIf="myForm.submitted && passe.errors && passe.errors.minlength">
-    Le mot de passe doit contenir au minimum 6 caractères
-  </div>
-  <button type="submit">Envoyer les données</button>
-</form>
-<div *ngIf="formulaireOK">Super, ton formulaire a été envoyé !</div>
+<main class="form-signin">
+  <form  (ngSubmit)="myForm.valid" #myForm="ngForm">
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+      name="adresseMail" [(ngModel)]="mail" required email #adresseMail="ngModel">
+      <label for="floatingInput">Email</label>
+    </div>
+    <div *ngIf="myForm.submitted && adresseMail.errors && adresseMail.errors.required" class="alert alert-danger">
+      Veuillez rentrer une adresse mail
+   </div>
+   <div *ngIf="myForm.submitted && adresseMail.errors && adresseMail.errors.email" class="alert alert-danger">
+      Le format d'email est incorrect
+   </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+      name="motDePasse" [(ngModel)]="motDePasse" #passe="ngModel" required minlength="6">
+      <label for="floatingPassword">Password</label>
+    </div>
+    <div *ngIf="myForm.submitted && passe.errors && passe.errors.required" class="alert alert-danger">
+      Veuillez rentrer un mot de passe
+   </div>
+   <div *ngIf="myForm.submitted && passe.errors && passe.errors.minlength" class="alert alert-danger">
+      Le mot de passe doit contenir au minimum 6 caractères
+   </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Envoyer</button>
+    <div *ngIf="myForm.submitted && myForm.valid" class="alert alert-success">
+      Login envoyé
+    </div>
+  </form>
+</main>
